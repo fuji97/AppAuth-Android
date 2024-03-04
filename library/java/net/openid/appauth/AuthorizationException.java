@@ -16,6 +16,7 @@ package net.openid.appauth;
 
 import static net.openid.appauth.Preconditions.checkNotEmpty;
 import static net.openid.appauth.Preconditions.checkNotNull;
+import net.openid.appauth.internal.UriParser;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -522,7 +523,7 @@ public final class AuthorizationException extends Exception {
      * Creates an exception from an OAuth redirect URI that describes an authorization failure.
      */
     public static AuthorizationException fromOAuthRedirect(
-            @NonNull Uri redirectUri) {
+            @NonNull UriParser redirectUri) {
         String error = redirectUri.getQueryParameter(PARAM_ERROR);
         String errorDescription = redirectUri.getQueryParameter(PARAM_ERROR_DESCRIPTION);
         String errorUri = redirectUri.getQueryParameter(PARAM_ERROR_URI);

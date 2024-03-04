@@ -23,6 +23,8 @@ import android.util.Base64;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.openid.appauth.internal.UriParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -79,7 +81,7 @@ class AuthorizationManagementUtil {
      */
     @SuppressLint("VisibleForTests")
     static AuthorizationManagementResponse responseWith(
-            AuthorizationManagementRequest request, Uri uri) {
+            AuthorizationManagementRequest request, UriParser uri) {
         if (request instanceof AuthorizationRequest) {
             return new AuthorizationResponse.Builder((AuthorizationRequest) request)
                 .fromUri(uri)
@@ -87,7 +89,7 @@ class AuthorizationManagementUtil {
         }
         if (request instanceof EndSessionRequest) {
             return new EndSessionResponse.Builder((EndSessionRequest) request)
-                .fromUri(uri)
+                .fromUri(uri.getUri())
                 .build();
         }
         throw new IllegalArgumentException("Malformed request or uri");
